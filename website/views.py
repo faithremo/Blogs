@@ -28,4 +28,3 @@ def create_post():
             return redirect(url_for('views.home'))
 
     return render_template('create_post.html', user=current_user)
-
