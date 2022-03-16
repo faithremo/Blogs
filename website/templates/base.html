@@ -45,15 +45,18 @@
     </nav>
 
     <div class="container">
-      <div class="blog-box">
-        <p id="blog">"Blog goes here"...</p>
-        <small id="author">Author</small>
+      <button id="btnq">CLICK FOR TODAY'S QUOTE</button>
+      <div class="quote-box">
+        <p id="quote" style="color: white;"> "Quote of the day.."</p>
+    <small id="author" style="color: white;">Author</small>
       </div>
-      <button id="btn">New Blog</button>
-
     </div>
 
 
+
+
+
+    
     {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
         {% for category, message in messages %}
@@ -76,29 +79,25 @@
       {% block content %}{% endblock %}
     </div>
 
+
     <script>
-      const blog = document.querySelector
-      ("#blog");
-      const author = document.querySelector
-      ("#author");
-      const btn = document.querySelector
-      ("#btn");
-
-      btn.addEventListner("click", getBlog);
-
-      function getBlog() {
-        fetch("http://quotes.stormconsultancy.co.uk/random.json")
-        .then(res => res.json())
+      const quote =document.querySelector("#quote");
+      const author =document.querySelector("#author");
+      const btnq =document.querySelector("#btnq");
+      btnq.addEventListener("click",getQuote);
+      function getQuote(){
+        fetch("http://quotes.stormconsultancy.co.uk/random.json").then(res =>(res.json()))
         .then(data =>{
-            blog.innerHTML = '"${data.content}"';
-            author.innerHTML = data.author;
+          quote.innerHTML = `"${data.quote}"`;
+          author.innerHTML= data.author;
         })
       }
-          
-
     </script>
+ 
+ 
+    
 
-      <script
+    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
